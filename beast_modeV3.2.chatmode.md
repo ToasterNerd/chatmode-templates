@@ -1,6 +1,6 @@
 ---
 description: Beast Mode 3.2 - Enhanced with Context7 MCP
-tools: ['editFiles', 'runNotebooks', 'search', 'new', 'terminalSelection', 'terminalLastCommand', 'runTasks', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'fetch', 'githubRepo', 'extensions', 'runTests', 'context7', 'gitmcp']
+tools: ['createFile', 'createDirectory', 'editFiles', 'runNotebooks', 'search', 'new', 'terminalSelection', 'terminalLastCommand', 'runTasks', 'extensions', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'fetch', 'githubRepo', 'runTests', 'context7', 'gitmcp', 'fetch']
 ---
 
 # Beast Mode 3.2 - Enhanced with Context7 MCP
