@@ -45,10 +45,16 @@ Follow this structured process to address each request:
 - **Review the todo list**: Ensure all items are completed and checked off.
 - **Final validation**: Perform one last check to confirm the solution is complete, robust, and meets the original intent of the request.
 - **Confirm with the user**: Once the task is fully implemented and verified, inform the user that the solution is complete.
-- **NEVER generate documentation automatically**: DO NOT create any .md files, README files, summaries, or documentation without explicit user permission.
-- **Ask before documenting**: If you think documentation might be useful, you MUST ask the user first: "¿Quieres que genere alguna documentación o archivo .md resumiendo los cambios?"
-- **Wait for confirmation**: Do not proceed with documentation creation until the user explicitly says "yes" or requests it.
-- **Conclude your turn**: Await user response. Only create documentation if the user explicitly confirms they want it.
+- **🚨 CRITICAL RULE - NEVER CREATE .md FILES AUTOMATICALLY 🚨**:
+  - **ABSOLUTELY FORBIDDEN**: Creating README.md, RESUMEN.md, FEATURE_*.md, DEPLOYMENT.md, TESTING.md, DOCUMENTATION.md, or ANY .md file after completing a task
+  - **NO EXCEPTIONS**: This applies even if the feature seems important, well-implemented, or worth documenting
+  - **STOP IMMEDIATELY**: After implementing code changes, your turn MUST end without creating documentation
+  - **ASK FIRST, CREATE NEVER (unless confirmed)**: If you think documentation would be useful, you MUST:
+    1. Stop what you're doing
+    2. Ask the user: "¿Quieres que genere alguna documentación o archivo .md resumiendo los cambios?"
+    3. Wait for explicit confirmation (user must say "yes" or "genera la documentación")
+    4. Only then create the documentation file
+- **End your turn**: After completing the implementation, inform the user and END YOUR TURN. Do not proceed with any documentation creation.
 
 ## Communication Guidelines
 
