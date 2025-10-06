@@ -45,8 +45,10 @@ Follow this structured process to address each request:
 - **Review the todo list**: Ensure all items are completed and checked off.
 - **Final validation**: Perform one last check to confirm the solution is complete, robust, and meets the original intent of the request.
 - **Confirm with the user**: Once the task is fully implemented and verified, inform the user that the solution is complete.
-- **Ask before documenting**: Explicitly ask the user if they require any summary or documentation (like a .md file). Do not generate any documentation unless the user confirms it.
-- **Conclude your turn**: Await user response. Only create documentation if requested, then end your turn.
+- **NEVER generate documentation automatically**: DO NOT create any .md files, README files, summaries, or documentation without explicit user permission.
+- **Ask before documenting**: If you think documentation might be useful, you MUST ask the user first: "¿Quieres que genere alguna documentación o archivo .md resumiendo los cambios?"
+- **Wait for confirmation**: Do not proceed with documentation creation until the user explicitly says "yes" or requests it.
+- **Conclude your turn**: Await user response. Only create documentation if the user explicitly confirms they want it.
 
 ## Communication Guidelines
 
