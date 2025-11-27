@@ -74,6 +74,85 @@ print(
 )
 ```
 
+## ⚠️ Critical: sys.path Setup for Local Imports
+
+**IMPORTANT**: When importing local modules (scripts, laser_cutting_system, etc.), you MUST set up `sys.path` BEFORE the import statements. This is a common source of `ModuleNotFoundError`.
+
+### ❌ WRONG - Import before path setup
+```python
+import os
+import sys
+from pathlib import Path
+
+import ejecutar_completo  # ❌ FAILS: sys.path not configured yet
+
+# Too late - import already failed
+script_dir = Path(__file__).parent
+sys.path.insert(0, str(script_dir))
+```
+
+### ✅ CORRECT - Path setup before imports
+```python
+import os
+import sys
+from pathlib import Path
+
+# Setup sys.path FIRST (must be before importing local modules)
+script_dir = Path(__file__).parent
+laserapp_dir = script_dir.parent
+sys.path.insert(0, str(script_dir))
+sys.path.insert(0, str(laserapp_dir))
+
+# NOW import local modules
+import ejecutar_completo  # ✅ Works: path is configured
+from laser_cutting_system.main import procesar_dxf_con_iso_mejorado
+```
+
+### Standard Pattern for Services
+```python
+"""Service docstring"""
+import os
+import sys
+from pathlib import Path
+from typing import Any, Dict, Optional
+
+# Add directories to Python path for local imports
+# Path: services -> laserapp (parent)
+LASERAPP_DIR = Path(__file__).parent.parent
+sys.path.insert(0, str(LASERAPP_DIR))
+
+# Add scripts directory to Python path
+SCRIPTS_DIR = LASERAPP_DIR / 'scripts'
+sys.path.insert(0, str(SCRIPTS_DIR))
+
+# Import local modules (must be after sys.path modification)
+import ejecutar_completo
+
+
+class MyService:
+    pass
+```
+
+### Standard Pattern for Scripts
+```python
+#!/usr/bin/env python3
+"""Script docstring"""
+import json
+import os
+import sys
+from pathlib import Path
+
+# Setup sys.path for local imports (must be before importing local modules)
+script_dir = Path(__file__).parent
+laserapp_dir = script_dir.parent
+sys.path.insert(0, str(script_dir))
+sys.path.insert(0, str(laserapp_dir))
+
+# Import local modules after path setup
+from convertir_unidades_dxf import obtener_archivo_en_milimetros
+from laser_cutting_system.main import procesar_dxf_con_iso_mejorado
+```
+
 ## Project Structure
 
 ```
@@ -87,10 +166,16 @@ api/
 │   │   └── laser_service.py
 │   ├── models/            # Pydantic schemas
 │   │   └── laser.py
+│   ├── scripts/           # Standalone execution scripts
+│   │   ├── ejecutar_analisis.py    # Individual piece analysis
+│   │   ├── ejecutar_nesting.py     # Nesting optimization
+│   │   ├── ejecutar_completo.py    # Complete orchestrator
+│   │   └── convertir_unidades_dxf.py
 │   └── laser_cutting_system/  # Analysis system
+│       ├── main.py        # Compatibility API
 │       ├── analysis/      # Nesting algorithms
 │       ├── config/        # System configuration
-│       ├── core/          # Core logic
+│       ├── core/          # Core logic (processor.py)
 │       ├── geometry/      # Geometric processing
 │       └── reporting/     # Report generation
 ```

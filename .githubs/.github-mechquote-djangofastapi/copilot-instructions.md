@@ -189,3 +189,29 @@ response = requests.post(f"{FASTAPI_BASE_URL}/api/laser/analyze", ...)
 4. 🛑 **STOP HERE** - DO NOT create any .md file
 5. ❓ Only if you think it would be useful: Ask "Would you like me to generate documentation?"
 6. ⏸️ Wait for explicit user confirmation
+
+## 🔄 Instructions Auto-Update - MANDATORY (Beast Mode)
+
+**When working in Beast Mode**, after completing code changes that establish NEW patterns, the agent **MUST automatically** invoke the `instructions-curator` subagent.
+
+### Trigger Criteria (if ANY is met, invoke subagent):
+- ✅ New pattern established (used/will be used 3+ times)
+- ✅ New naming convention
+- ✅ New reusable component/service/utility
+- ✅ New workflow or development process
+- ✅ Critical bug fix that reveals a non-obvious requirement
+
+### MANDATORY Workflow:
+```
+1. ✅ Complete code implementation
+2. ✅ Verify it works
+3. 🔄 AUTO-EVALUATE: "Do these changes establish a new pattern?"
+4. 🤖 IF YES → INVOKE runSubagent with instructions-curator (DO NOT ASK)
+5. ✅ Inform user: "Task completed. Instructions updated."
+```
+
+### ⚠️ THIS IS NOT OPTIONAL
+- Do NOT wait for user to ask
+- Do NOT skip this step
+- Do NOT end your response without evaluating this
+- The subagent updates `.instructions.md` files only (safe, non-destructive)
