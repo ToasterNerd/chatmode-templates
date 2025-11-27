@@ -91,7 +91,7 @@ script_dir = Path(__file__).parent
 sys.path.insert(0, str(script_dir))
 ```
 
-### ✅ CORRECT - Path setup before imports
+### ✅ CORRECT - Path setup before imports with noqa
 ```python
 import os
 import sys
@@ -103,10 +103,15 @@ laserapp_dir = script_dir.parent
 sys.path.insert(0, str(script_dir))
 sys.path.insert(0, str(laserapp_dir))
 
-# NOW import local modules
-import ejecutar_completo  # ✅ Works: path is configured
-from laser_cutting_system.main import procesar_dxf_con_iso_mejorado
+# NOW import local modules - use noqa: E402 to satisfy flake8
+import ejecutar_completo  # noqa: E402
+from laser_cutting_system.main import procesar_dxf_con_iso_mejorado  # noqa: E402
 ```
+
+### Why `# noqa: E402`?
+Flake8 rule E402 requires all imports at the top of the file. But we NEED `sys.path` 
+setup before local imports. The `# noqa: E402` comment tells flake8 to ignore this 
+specific rule on that line. This is the correct solution for this pattern.
 
 ### Standard Pattern for Services
 ```python
@@ -116,7 +121,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-# Add directories to Python path for local imports
+# Add directories to Python path for local imports (MUST be before local imports)
 # Path: services -> laserapp (parent)
 LASERAPP_DIR = Path(__file__).parent.parent
 sys.path.insert(0, str(LASERAPP_DIR))
@@ -125,8 +130,7 @@ sys.path.insert(0, str(LASERAPP_DIR))
 SCRIPTS_DIR = LASERAPP_DIR / 'scripts'
 sys.path.insert(0, str(SCRIPTS_DIR))
 
-# Import local modules (must be after sys.path modification)
-import ejecutar_completo
+import ejecutar_completo  # noqa: E402
 
 
 class MyService:
@@ -142,15 +146,14 @@ import os
 import sys
 from pathlib import Path
 
-# Setup sys.path for local imports (must be before importing local modules)
+# Setup sys.path for local imports (MUST be before importing local modules)
 script_dir = Path(__file__).parent
 laserapp_dir = script_dir.parent
 sys.path.insert(0, str(script_dir))
 sys.path.insert(0, str(laserapp_dir))
 
-# Import local modules after path setup
-from convertir_unidades_dxf import obtener_archivo_en_milimetros
-from laser_cutting_system.main import procesar_dxf_con_iso_mejorado
+from convertir_unidades_dxf import obtener_archivo_en_milimetros  # noqa: E402
+from laser_cutting_system.main import procesar_dxf_con_iso_mejorado  # noqa: E402
 ```
 
 ## Project Structure
@@ -425,3 +428,26 @@ logger.error(f'❌ Processing error: {error}')
 print(f'🔍 DEBUG - Parameters: {params}')
 print(f'✅ Analysis completed: {result}')
 ```
+
+## ⚠️ Emoji Usage in Python Strings (UTF-8 Encoding)
+
+**CRITICAL**: Always use direct emoji characters, NEVER Unicode escape sequences.
+
+Python's UTF-8 encoder cannot handle surrogate pairs written as escape sequences, causing runtime errors like:
+`'utf-8' codec can't encode characters: surrogates not allowed`
+
+```python
+# ❌ WRONG - Unicode escape sequences (causes UTF-8 encoding error)
+print('\ud83d\udcc1 File loaded')
+logger.info('\ud83d\udd0d Analyzing...')
+
+# ✅ CORRECT - Direct emoji characters
+print('📁 File loaded')
+logger.info('🔍 Analyzing...')
+```
+
+**Common emojis used in this project:**
+- `📁` folder, `📥` inbox, `📤` outbox
+- `✅` success, `❌` error, `⚠️` warning
+- `🔍` search/analyze, `🔧` config/settings
+- `📊` data/stats, `💰` costs/pricing
