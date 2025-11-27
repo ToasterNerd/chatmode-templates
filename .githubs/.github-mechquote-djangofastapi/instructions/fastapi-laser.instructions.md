@@ -5,6 +5,13 @@ description: "Instructions for FastAPI development in MechQuote API Extra"
 
 # FastAPI Instructions - MechQuote API Extra
 
+## 🌐 Language: ENGLISH ONLY
+
+All code must be in English:
+- Variable/function names: `analyze_geometry()`, `calculate_costs()`
+- Comments and docstrings: `# Process DXF file`, `"""Run nesting optimization"""`
+- New file names: `laser_service.py`, `nesting_utils.py`
+
 ## 🔧 Code Formatting Rules (CRITICAL)
 
 **All Python code MUST comply with pre-commit hooks:**

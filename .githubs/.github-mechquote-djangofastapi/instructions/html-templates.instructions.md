@@ -5,6 +5,16 @@ description: "Instructions for HTML/Django templates in MechQuote"
 
 # HTML/Templates Instructions - MechQuote
 
+## 🌐 Language: ENGLISH ONLY
+
+All code must be in English:
+- HTML IDs and classes: `id="submit-btn"`, `class="file-preview"`
+- Comments: `<!-- Main content section -->`
+- New file names: `laser_form.html`, `client_list.html`
+- Data attributes: `data-file-type="dxf"`
+
+**Exception:** User-facing text can be in Spanish for UI display.
+
 ## Base Template Structure
 
 ```html

@@ -5,6 +5,15 @@ description: "Instructions for Django development in MechQuote"
 
 # Django Instructions - MechQuote
 
+## 🌐 Language: ENGLISH ONLY
+
+All new code must be in English:
+- Variable/function names: `get_user_data()`, `calculate_total()`
+- Comments and docstrings: `# Process the request`, `"""Return user profile"""`
+- New file names: `laser_service.py`, `user_utils.py`
+
+**Exception:** Existing model fields in Spanish (`nombre_empresa`, `usuario`) - maintain consistency.
+
 ## 🔧 Code Formatting Rules (CRITICAL)
 
 **All Python code MUST comply with pre-commit hooks:**

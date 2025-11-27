@@ -46,6 +46,24 @@ app/
 - Dual validation: client-side + server-side
 - **NEVER generate .md documentation files without asking the user first**
 
+## 🌐 Language Convention - ENGLISH ONLY
+
+**All code must be written in English.** This includes:
+
+- ✅ Variable names: `user_count`, `total_price`, `is_active`
+- ✅ Function names: `calculate_total()`, `get_user_data()`, `validate_input()`
+- ✅ Class names: `LaserAnalysis`, `UserProfile`, `ClienteManager`
+- ✅ File names: `laser_service.py`, `user_utils.js`, `base_template.html`
+- ✅ Comments and docstrings: `# Calculate the total cost`, `"""Process DXF file"""`
+- ✅ Constants: `MAX_FILE_SIZE`, `DEFAULT_MARGIN`, `ERROR_MESSAGES`
+- ✅ Dictionary keys: `{'status': 'success', 'message': 'Created'}`
+- ✅ Error messages: `'Invalid file format'`, `'User not found'`
+
+**Exceptions (existing legacy code):**
+- Some model field names may be in Spanish (e.g., `nombre_empresa`, `usuario`)
+- Database table names inherited from legacy code
+- When maintaining existing code, follow its current naming
+
 ## 🔧 Code Formatting & Linters (CRITICAL)
 
 This project uses **pre-commit hooks** with flake8, isort, and autopep8. All generated code **MUST** comply with these rules:

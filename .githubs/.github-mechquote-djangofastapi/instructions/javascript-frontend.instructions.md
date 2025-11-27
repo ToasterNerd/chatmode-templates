@@ -5,6 +5,14 @@ description: "Instructions for JavaScript frontend in MechQuote"
 
 # JavaScript Instructions - MechQuote
 
+## 🌐 Language: ENGLISH ONLY
+
+All code must be in English:
+- Variable/function names: `handleFormSubmit()`, `validateFile()`
+- Comments: `// Initialize the form`, `// Validate DXF file`
+- New file names: `laser_form.js`, `file_validator.js`
+- Error messages: `'Invalid file format'`, `'Upload failed'`
+
 ## Function Patterns
 
 ```javascript
